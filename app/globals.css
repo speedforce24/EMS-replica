@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.pin-input:focus {
+    border-color: yellow !important;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 0, 0.5);
+  }
+  
+  .arrow{
+    @apply rounded bg-customArrow ;width: 16px; /* Fixed width to make it a small square */
+    height: 16px;
+    align-items: center;
+  }  
+  /* styles/globals.css */
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf') format('woff2'),
+       url('/fonts/PlusJakartaSans-VariableFont_wght.ttf') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf') format('woff2'),
+       url('/fonts/PlusJakartaSans-VariableFont_wght.ttf') format('woff');
+    font-weight: 700;
+  font-style: normal;
+}
+
+
+
+
+/* Apply custom font to specific elements */
+.font-plus-jakarta-sans {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
