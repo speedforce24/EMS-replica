@@ -30,11 +30,25 @@
     font-weight: 700;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Sen';
+  src: 
+       url('/fonts/Sen-VariableFont_wght.ttf') format('woff');
+    font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sen';
+  src: 
+       url('/fonts/Sen-VariableFont_wght.ttf') format('woff');
+    font-weight: 400;
+  font-style: normal;
+}
 
 
 
 
 /* Apply custom font to specific elements */
 .font-plus-jakarta-sans {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans','Sen', sans-serif,;
 }

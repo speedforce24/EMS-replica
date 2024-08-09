@@ -20,10 +20,15 @@ const config: Config = {
         customBlack2:'rgba(5, 13, 28, 1)',
         customBlack3:'rgba(16, 25, 40, 1)',
         customWhite2:'rgba(244, 248, 247, 1)',
+        customWhite4:"rgba(247, 247, 247, 1)",
         customYellow:'rgba(243, 162, 24, 1)',
         customWhite3:'rgba(255, 255, 255, 1)',
+        customGrey:'rgba(249, 250, 251, 1)',
+        customGrey2:'rgba(232, 236, 244, 1)',
         customArrow:'rgba(0, 0, 0, 0.1)',
         customAqua:' rgba(53, 194, 193, 1)',
+        customGrey3:'rgba(131, 145, 161, 1)',
+        customOrange:'rgba(255, 144, 83, 1)',
         customPeach:'rgba(252, 222, 219, 1)'
 },
       backdropBlur: {

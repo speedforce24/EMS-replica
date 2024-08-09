@@ -12,6 +12,34 @@ export default function AdminPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showForm, setShowForm] = useState(false); // State to manage form visibility
   const [firstName, setFirstName] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    institutionName: '',
+    lastName: '',
+    phone: '',
+  
+  });
+
+  const [focusedField, setFocusedField] = useState<string | null>(null);
+
+  const isFormValid = () => {
+    return formData.institutionName && formData.lastName && formData.phone ;
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleFocus = (field: string) => {
+    setFocusedField(field);
+  };
+
+  const handleBlur = (field: string) => {
+    if (!formData[field as keyof typeof formData]) {
+      setFocusedField(null);
+    }
+  };
 
   useEffect(() => {
     // Retrieve the userData object from local storage
@@ -50,7 +78,7 @@ export default function AdminPage() {
             className="ml-4 w-[40px] h-[37px] rounded-md"
           />
           <div>
-            <h2 className="text-sm font-semibold">Welcome, {firstName || ''}!</h2>
+            <h2 className="text-sm font-semibold">Welcome, {firstName || 'Guest'}!</h2>
             <p className="text-sm font-extralight text-customYellow">Superadmin</p>
           </div>
         </div>
@@ -154,44 +182,89 @@ export default function AdminPage() {
       </main>
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="relative bg-customWhite p-6 rounded-lg shadow-lg w-[768px]">
+          <div className="relative bg-customWhite4 p-6 rounded-xl shadow-lg w-[768px] h-[488px]">
+          <h2 className="text-2xl font-bold mb-4 text-gray-500">Add Institution</h2>
+            <div className="w-[704px] h-[368px] rounded-lg bg-customWhite3 pb-[20px] pt-[16px] pl-[20px] p-[16px] mt-[34px] ml-[11px]">
             <button 
               onClick={handleCloseForm}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+              className="absolute top-6 right-6 text-gray-500 hover:text-gray-800"
               aria-label="Close"
             >
-              <FaTimes size={24} />
+              <FaTimes size={30} />
             </button>
-            <h2 className="text-2xl font-bold mb-4">Add Institution</h2>
-            <form className="b">
-              <div className="mb-4">
-                <label htmlFor="institutionName" className="block text-sm font-medium text-gray-700">Institution Name</label>
-                <input 
-                  type="text" 
-                  id="institutionName" 
-                  name="institutionName" 
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" 
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location</label>
-                <input 
-                  type="text" 
-                  id="location" 
-                  name="location" 
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" 
-                />
-              </div>
-              <div className="flex justify-end gap-4">
-               
-                <button 
-                  type="submit"
-                  className="py-2 px-4 bg-blue-500 text-white rounded-md"
-                  >
-                    Save
-                  </button>
-                </div>
+            
+            <form className="grid grid-cols-2 gap-3">
+              
+            <div className="relative">
+              <input
+                type="text"
+                name="institutionName"
+                value={formData.institutionName}
+                onChange={handleChange}
+                onFocus={() => handleFocus('institutionName')}
+                onBlur={() => handleBlur('institutionName')}
+                className=" w-[324px] bg-customGrey border border-customGrey2 text-black text-lg font-semibold px-4 pt-[24px] pb-[2px] rounded-xl appearance-none focus:outline-none focus:ring-0"
+              />
+              <label
+                htmlFor="institutionName"
+                className={`absolute left-4 transition-all duration-300  bottom-[-2px]  text-customGrey3 font-sans text-base font-medium  px-1 cursor-text ${focusedField === 'institutionName' || formData.institutionName ? 'top-[4%] text-sm' : 'top-[13px] text-lg'}`}                
+                onClick={() => document.getElementById('firstName')?.focus()}
+              >
+                Institution Name<span className="text-customOrange">*</span>
+              </label>
+            </div>
+
+            <div className="relative mt-[0px]">
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                onFocus={() => handleFocus('lastName')}
+                onBlur={() => handleBlur('lastName')}
+                className="block w-[324px] bg-customGrey border border-customGrey2 text-black text-lg font-semibold px-4 pt-[24px] pb-[4px] rounded-xl appearance-none focus:outline-none focus:ring-0"
+              />
+              <label
+                htmlFor="lastName"
+                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-customGrey3 font-sans text-base font-medium cursor-text ${focusedField === 'lastName' || formData.lastName ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+                onClick={() => document.getElementById('lastName')?.focus()}
+              >
+                Location<span className="text-customOrange">*</span>
+              </label>
+            </div>
+
+            <div className="relative mt-[10px]">
+              <input
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                onFocus={() => handleFocus('phone')}
+                onBlur={() => handleBlur('phone')}
+                className="block w-[324px] bg-customGrey border border-customGrey2 text-black text-lg font-semibold px-4 pt-[21px] pb-[4px] rounded-xl appearance-none focus:outline-none focus:ring-0"
+              />
+              <label
+                htmlFor="phone"
+                className={`absolute left-4 transition-all duration-300 bottom-[-2px]  text-customGrey3 font-sans text-base font-medium  cursor-text ${focusedField === 'phone' || formData.phone ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+                onClick={() => document.getElementById('phone')?.focus()}
+              >
+                Phone<span className="text-customOrange">*</span>
+              </label>
+            </div>
+              
+                
             </form>
+            <div className="flex justify-end gap-4">
+               
+            <button
+              type="submit"
+              className={`w-[360px] h-[48px] rounded-xl text-lg font-semibold ${isFormValid() ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700 cursor-not-allowed'}`}
+              disabled={!isFormValid()}
+            >
+              Sign Up
+            </button>
+                </div>
+            </div>
           </div>
         </div>
       )}
