@@ -152,7 +152,7 @@ export default function AdminPage() {
                   <p className="block text-lg font-extrabold text-customBlack">Make Subscription</p>
                   <p>Here is a brief detail about what it means to add institution</p>
                   <Link href="/signin" legacyBehavior>
-                    <a className="block py-[12px] w-[100px] mt-4 h-[56px] rounded-2xl text-center text-white bg-customAqua">
+                    <a className="block py-[12px] w-[100px] mt-5 h-[56px] rounded-2xl text-center text-white bg-customAqua">
                       Start
                     </a>
                   </Link>
@@ -183,8 +183,8 @@ export default function AdminPage() {
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="relative bg-customWhite4 p-6 rounded-xl shadow-lg w-[768px] h-[488px]">
-          <h2 className="text-2xl font-bold mb-4 text-gray-500">Add Institution</h2>
-            <div className="w-[704px] h-[368px] rounded-lg bg-customWhite3 pb-[20px] pt-[16px] pl-[20px] p-[16px] mt-[34px] ml-[11px]">
+          <h2 className="text-2xl font-bold mb-4 text-customBlack">Create Institution</h2>
+            <div className="w-[704px] h-[368px] rounded-2xl bg-customWhite3 pb-[20px] pt-[16px] pl-[20px] p-[16px] mt-[30px] ml-[11px]">
             <button 
               onClick={handleCloseForm}
               className="absolute top-6 right-6 text-gray-500 hover:text-gray-800"
@@ -226,7 +226,7 @@ export default function AdminPage() {
               />
               <label
                 htmlFor="lastName"
-                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-customGrey3 font-sans text-base font-medium cursor-text ${focusedField === 'lastName' || formData.lastName ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-customGrey3 font-sans text-base font-medium cursor-text ${focusedField === 'lastName' || formData.lastName ? 'top-[4%] text-sm' : 'top-[13px] text-lg'}`}
                 onClick={() => document.getElementById('lastName')?.focus()}
               >
                 Location<span className="text-customOrange">*</span>
@@ -245,7 +245,7 @@ export default function AdminPage() {
               />
               <label
                 htmlFor="phone"
-                className={`absolute left-4 transition-all duration-300 bottom-[-2px]  text-customGrey3 font-sans text-base font-medium  cursor-text ${focusedField === 'phone' || formData.phone ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+                className={`absolute left-4 transition-all duration-300 bottom-[-2px]  text-customGrey3 font-sans text-base font-medium  cursor-text ${focusedField === 'phone' || formData.phone ? 'top-[4%] text-sm' : 'top-[13px] text-lg'}`}
                 onClick={() => document.getElementById('phone')?.focus()}
               >
                 Phone<span className="text-customOrange">*</span>
@@ -254,14 +254,14 @@ export default function AdminPage() {
               
                 
             </form>
-            <div className="flex justify-end gap-4">
+            <div className="flex justify-center mt-[140px]  gap-4">
                
             <button
               type="submit"
-              className={`w-[360px] h-[48px] rounded-xl text-lg font-semibold ${isFormValid() ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700 cursor-not-allowed'}`}
+              className={`w-[360px] h-[48px] rounded-xl text-lg font-semibold ${isFormValid() ? 'bg-customAqua text-white' : 'bg-gray-300 text-white cursor-not-allowed'}`}
               disabled={!isFormValid()}
             >
-              Sign Up
+              Create
             </button>
                 </div>
             </div>
