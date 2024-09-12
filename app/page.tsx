@@ -61,6 +61,8 @@ export default function Home() {
       );
 
       if (response.status === 201) {
+        const userData = response.data.data;
+        localStorage.setItem('userData', JSON.stringify(userData));
         toast.success('User Login successfully! Redirecting...', {
           onClose: () => setTimeout(() => {
             router.push('/otp');
@@ -83,14 +85,20 @@ export default function Home() {
       toast.error('An error occurred. Please try again.');
     }
   };
+
   return (
-    <div className='grid grid-cols-2' >
-      <div className="bg-customGreen relative h-[800px] w-[678px] p-6 backdrop-blur-md text-black ">    
+    <div className="grid lg:grid-cols-2 grid-cols-1">
+      <div className="bg-customGreen relative h-[800px] w-full lg:w-full p-6 backdrop-blur-md text-black">
         <Image src="/img/logo2.png" alt="Logo" width={100} height={100} />
-        <form className=' mt-[11%] mb-[300px]  lg:ml-28 ml-8' onSubmit={handleSubmit}>
-          <div className='w-[360px] h-[150px] gap-8'>
-            <h2 className="text-white text-4xl mb-4 font-bold ">Sign Up</h2>
-            <div className="text-white mt-2">Already have an account? <Link href="/signin" legacyBehavior><a className="text-blue-500">Login Now</a></Link></div>
+        <form className="mt-[11%] mb-[300px] lg:ml-28 ml-8" onSubmit={handleSubmit}>
+          <div className="w-[360px] h-[150px] gap-8">
+            <h2 className="text-white text-4xl mb-4 font-bold">Sign Up</h2>
+            <div className="text-white mt-2">
+              Already have an account?{' '}
+              <Link href="/signin" legacyBehavior>
+                <a className="text-blue-500">Login Now</a>
+              </Link>
+            </div>
             <div className="flex space-x-[8px] mt-4">
               <button type="button" className="w-[168px] h-[56px] rounded-xl border border-gray-600">
                 <Image src="/img/icons8-facebook-48.png" alt="Facebook" className="ml-16" width={50} height={50} />
@@ -115,11 +123,13 @@ export default function Home() {
                 onChange={handleChange}
                 onFocus={() => handleFocus('firstName')}
                 onBlur={() => handleBlur('firstName')}
-                className=" w-[360px] bg-white border border-gray-600 text-black text-lg font-semibold px-4 pt-[24px] pb-[2px] rounded-xl appearance-none focus:outline-none focus:ring-0"
+                className="w-[360px] bg-white border border-gray-600 text-black text-lg font-semibold px-4 pt-[24px] pb-[2px] rounded-xl appearance-none focus:outline-none focus:ring-0"
               />
               <label
                 htmlFor="firstName"
-                className={`absolute left-4 transition-all duration-300  bottom-[-2px] text-gray-600 px-1 cursor-text ${focusedField === 'firstName' || formData.firstName ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}                
+                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 px-1 cursor-text ${
+                  focusedField === 'firstName' || formData.firstName ? 'top-[4%] text-lg' : 'top-[13px] text-lg'
+                }`}
                 onClick={() => document.getElementById('firstName')?.focus()}
               >
                 First Name<span className="text-red-600">*</span>
@@ -138,7 +148,9 @@ export default function Home() {
               />
               <label
                 htmlFor="lastName"
-                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600   cursor-text ${focusedField === 'lastName' || formData.lastName ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 cursor-text ${
+                  focusedField === 'lastName' || formData.lastName ? 'top-[4%] text-lg' : 'top-[13px] text-lg'
+                }`}
                 onClick={() => document.getElementById('lastName')?.focus()}
               >
                 Last Name<span className="text-red-600">*</span>
@@ -157,7 +169,9 @@ export default function Home() {
               />
               <label
                 htmlFor="phone"
-                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600   cursor-text ${focusedField === 'phone' || formData.phone ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 cursor-text ${
+                  focusedField === 'phone' || formData.phone ? 'top-[4%] text-lg' : 'top-[13px] text-lg'
+                }`}
                 onClick={() => document.getElementById('phone')?.focus()}
               >
                 Phone<span className="text-red-600">*</span>
@@ -165,7 +179,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative ">
+          <div className="relative">
             <input
               type="email"
               name="email"
@@ -177,7 +191,9 @@ export default function Home() {
             />
             <label
               htmlFor="email"
-              className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600   cursor-text ${focusedField === 'email' || formData.email ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+              className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 cursor-text ${
+                focusedField === 'email' || formData.email ? 'top-[4%] text-lg' : 'top-[13px] text-lg'
+              }`}
               onClick={() => document.getElementById('email')?.focus()}
             >
               Email<span className="text-red-600">*</span>
@@ -196,7 +212,9 @@ export default function Home() {
             />
             <label
               htmlFor="password"
-              className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600   cursor-text ${focusedField === 'password' || formData.password ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+              className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 cursor-text ${
+                focusedField === 'password' || formData.password ? 'top-[4%] text-lg' : 'top-[13px] text-lg'
+              }`}
               onClick={() => document.getElementById('password')?.focus()}
             >
               Password<span className="text-red-600">*</span>
@@ -215,39 +233,36 @@ export default function Home() {
             />
             <label
               htmlFor="confirmPassword"
-              className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600   cursor-text ${focusedField === 'confirmPassword' || formData.confirmPassword ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+              className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 cursor-text ${
+                focusedField === 'confirmPassword' || formData.confirmPassword ? 'top-[4%] text-lg' : 'top-[13px] text-lg'
+              }`}
               onClick={() => document.getElementById('confirmPassword')?.focus()}
             >
               Confirm Password<span className="text-red-600">*</span>
             </label>
           </div>
 
-          <div className="flex  mt-6">
-            <button
-              type="submit"
-              className={`w-[360px] h-[48px] rounded-xl text-lg font-semibold ${isFormValid() ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700 cursor-not-allowed'}`}
-              disabled={!isFormValid()}
-            >
-              Sign Up
-            </button>
-          </div>
+          <button
+            type="submit"
+            className={`mt-[24px] w-[360px] h-[56px] text-white text-lg font-semibold rounded-xl ${
+              isFormValid() ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-400 cursor-not-allowed'
+            }`}
+            disabled={!isFormValid()}
+          >
+            Sign Up
+          </button>
         </form>
-        </div>
-        <div
-        
-        >
-           <Image
-            src="/img/bg3.jpeg"
-            alt="Background Image"
-            width={777}
-            height={1024}
-            className="object-contain"
-           
-          
-          />
-          </div>
-        <ToastContainer />
-     
+      </div>
+      <div className="relative w-full h-[800px] hidden lg:block">
+        <Image
+          src="/img/bg3.jpeg"
+          alt="Background Image"
+          layout="fill"
+          objectFit="cover"
+          className="object-cover w-full h-full"
+        />
+      </div>
+      <ToastContainer />
     </div>
   );
 }

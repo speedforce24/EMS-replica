@@ -1,0 +1,3 @@
+/users/uploadusers
+ `https://t-ems-staging-6b1c9bd1c4a6.herokuapp.com/user/upload-users?type=${payload.userTypeId}&institutionId=${payload.institutionId}`,
+        payload.file

@@ -6,10 +6,9 @@ import { useRouter } from 'next/navigation';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { stringify } from 'querystring';
 
 export default function Signin() {
-  const router = useRouter(); // Move the useRouter hook inside the component function
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -40,12 +39,12 @@ export default function Signin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (!isFormValid()) {
       toast.error('Please fill in all required fields.');
       return;
     }
-  
+
     try {
       const response = await axios.post(
         'https://t-ems-staging-6b1c9bd1c4a6.herokuapp.com/user/sign-in',
@@ -56,24 +55,20 @@ export default function Signin() {
           },
         }
       );
-  
-      if (response.status === 201) {
-        
-        const userData = response.data.data; // This is the data object you want to store
 
-        // Store the entire data object in local storage
+      if (response.status === 201) {
+        const userData = response.data.data;
         localStorage.setItem('userData', JSON.stringify(userData));
         toast.success('User Login successfully! Redirecting...', {
-          onClose: () => setTimeout(() => {
-            router.push('/admin');
-          }, 3000),
+          onClose: () =>
+            setTimeout(() => {
+              router.push('/admin');
+            }, 3000),
         });
         setFormData({
           email: '',
           password: '',
         });
-        // Store the first name in localStorage
-        
       } else {
         toast.error('Failed to register user.');
       }
@@ -82,23 +77,45 @@ export default function Signin() {
       toast.error('An error occurred. Please try again.');
     }
   };
+
   return (
-    <div className="grid grid-cols-2 ">
+    <div className="grid grid-cols-1 lg:grid-cols-2">
       {/* Form Container */}
-      <div className="bg-customGreen relative h-[800px] w-[678px] p-6  text-black ">
+      <div className="bg-customGreen relative h-[800px] w-full lg:w-full p-6 backdrop-blur-md text-black">
         <Image src="/img/logo2.png" alt="Logo" width={100} height={100} />
-        <form className='mt-[11%] mb-[20%] lg:ml-28 ml-8' onSubmit={handleSubmit}>
+        <form className="mt-[11%] mb-[20%] lg:ml-28 ml-8" onSubmit={handleSubmit}>
           <div className="w-[360px] h-[180px] gap-8">
             <h2 className="text-white text-2xl mb-4">Sign In</h2>
             <div className="text-white mt-2">
-              Don't have an account? <Link href="/" legacyBehavior><a className="text-blue-500">Register Here</a></Link>
+              Don't have an account?{' '}
+              <Link href="/" legacyBehavior>
+                <a className="text-blue-500">Register Here</a>
+              </Link>
             </div>
             <div className="flex space-x-[8px] mt-4">
-              <button type="button" className="w-[168px] h-[56px] rounded-xl border border-gray-600">
-                <Image src="/img/icons8-facebook-48.png" alt="Facebook" className="ml-16" width={50} height={50} />
+              <button
+                type="button"
+                className="w-[168px] h-[56px] rounded-xl border border-gray-600"
+              >
+                <Image
+                  src="/img/icons8-facebook-48.png"
+                  alt="Facebook"
+                  className="ml-16"
+                  width={50}
+                  height={50}
+                />
               </button>
-              <button type="button" className="w-[168px] h-[56px] rounded-xl border border-gray-600">
-                <Image src="/img/icons8-google-60.png" alt="Google" className="ml-16 " width={50} height={50} />
+              <button
+                type="button"
+                className="w-[168px] h-[56px] rounded-xl border border-gray-600"
+              >
+                <Image
+                  src="/img/icons8-google-60.png"
+                  alt="Google"
+                  className="ml-16"
+                  width={50}
+                  height={50}
+                />
               </button>
             </div>
           </div>
@@ -115,7 +132,11 @@ export default function Signin() {
               />
               <label
                 htmlFor="email"
-                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 cursor-text ${focusedField === 'email' || formData.email ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 cursor-text ${
+                  focusedField === 'email' || formData.email
+                    ? 'top-[4%] text-lg'
+                    : 'top-[13px] text-lg'
+                }`}
                 onClick={() => document.getElementById('email')?.focus()}
               >
                 Email<span className="text-red-600">*</span>
@@ -133,17 +154,27 @@ export default function Signin() {
               />
               <label
                 htmlFor="password"
-                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 cursor-text ${focusedField === 'password' || formData.password ? 'top-[4%] text-lg' : 'top-[13px] text-lg'}`}
+                className={`absolute left-4 transition-all duration-300 bottom-[-2px] text-gray-600 cursor-text ${
+                  focusedField === 'password' || formData.password
+                    ? 'top-[4%] text-lg'
+                    : 'top-[13px] text-lg'
+                }`}
                 onClick={() => document.getElementById('password')?.focus()}
               >
                 Password<span className="text-red-600">*</span>
               </label>
             </div>
-            <Link href="/forget" legacyBehavior><a className="text-blue-500 ml-56">Forgot Password?</a></Link>
+            <Link href="/forget" legacyBehavior>
+              <a className="text-blue-500 ml-56">Forgot Password?</a>
+            </Link>
           </div>
           <button
             type="submit"
-            className={`block px-[72px] py-[12px] w-[360px] rounded-xl text-center text-white ${isFormValid() ? 'bg-blue-500 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
+            className={`block px-[72px] py-[12px] w-[360px] rounded-xl text-center text-white ${
+              isFormValid()
+                ? 'bg-blue-500 hover:bg-blue-700'
+                : 'bg-gray-400 cursor-not-allowed'
+            }`}
           >
             Sign In
           </button>
@@ -151,13 +182,13 @@ export default function Signin() {
       </div>
 
       {/* Background Image */}
-      <div>
+      <div className="relative w-full h-[800px] hidden lg:block">
         <Image
           src="/img/bg3.jpeg"
           alt="Background Image"
-          width={777}
-          height={1024}
-          className="object-contain"
+          layout="fill"
+          objectFit="cover"
+          className="object-cover w-full h-full"
         />
       </div>
       <ToastContainer /> {/* Ensure ToastContainer is outside the form */}

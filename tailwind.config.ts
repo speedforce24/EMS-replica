@@ -13,6 +13,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      
       colors:{
         customBlack: 'rgba(9, 9, 9, 0.7)',
         customWhite:'rgba(255, 255, 255, 1)',
@@ -29,7 +30,9 @@ const config: Config = {
         customAqua:' rgba(53, 194, 193, 1)',
         customGrey3:'rgba(131, 145, 161, 1)',
         customOrange:'rgba(255, 144, 83, 1)',
-        customPeach:'rgba(252, 222, 219, 1)'
+        customPeach:'rgba(252, 222, 219, 1)',
+        customICON:"rgba(75, 70, 92, 0.08)",
+        customBorder:'rgba(189, 195, 205, 1)'
 },
       backdropBlur: {
         xs: '2px',
