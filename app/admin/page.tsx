@@ -259,9 +259,11 @@ export default function AdminPage() {
   
   useEffect(() => {
     const storedData = localStorage.getItem('userData');
+    console.log(storedData)
     if (storedData) {
       try {
         const userData = JSON.parse(storedData);
+        console.log(userData.id)
         setId(userData.id);
       } catch (error) {
         console.error('Error parsing user data:', error);
@@ -269,28 +271,28 @@ export default function AdminPage() {
     }
   }, []);
 
-  useEffect(() => {
-    const storedData = localStorage.getItem('userData');
-    if (storedData) {
-      try {
-        const userData = JSON.parse(storedData);
-        setId(userData.institutionId, );
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-      }
-    }
-  }, []);
-  useEffect(() => {
-    const storedData = localStorage.getItem('userData');
-    if (storedData) {
-      try {
-        const userData = JSON.parse(storedData);
-        setId(userData.userTypeId,);
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem('userData');
+  //   if (storedData) {
+  //     try {
+  //       const userData = JSON.parse(storedData);
+  //       setId(userData.institutionId, );
+  //     } catch (error) {
+  //       console.error('Error parsing user data:', error);
+  //     }
+  //   }
+  // }, []);
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem('userData');
+  //   if (storedData) {
+  //     try {
+  //       const userData = JSON.parse(storedData);
+  //       setId(userData.userTypeId,);
+  //     } catch (error) {
+  //       console.error('Error parsing user data:', error);
+  //     }
+  //   }
+  // }, []);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
